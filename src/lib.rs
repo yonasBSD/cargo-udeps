@@ -261,12 +261,8 @@ impl OptUdeps {
 		assert!(config.nightly_features_allowed);
 		let ws = clap_matches.workspace(config)?;
 		let test = match self.profile.as_deref() {
-			None => false,
 			Some("test") => true,
-			Some(profile) => return Err(anyhow::anyhow!(
-				"unknown profile: `{}`, only `test` is currently supported",
-				profile,
-			)),
+			_ => false,
 		};
 		let mode = UserIntent::Check { test };
 		let pc = ProfileChecking::LegacyTestOnly;
